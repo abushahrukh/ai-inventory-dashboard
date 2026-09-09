@@ -1,3 +1,5 @@
+'use client';
+import { useCartStore } from './store/cartStore';
 export default function Home() {
   // This is an array of 6 sample products (hardcoded for now)
   const products = [
@@ -36,9 +38,17 @@ export default function Home() {
             </div>
             <h2 className="text-lg font-semibold">{product.name}</h2>
             <p className="text-gray-700">${product.price.toFixed(2)}</p>
-            <button className="mt-2 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
-              Add to Cart
-            </button>
+            <button
+  onClick={() => {
+    // This line adds the product to the cart store
+    useCartStore.getState().addItem(product);
+    // This line prints a message to the console
+    console.log(`Added ${product.name} to cart!`);
+  }}
+  className="mt-2 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+>
+  Add to Cart
+</button>
           </div>
         ))}
       </div>
